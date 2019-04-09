@@ -15,7 +15,7 @@ steps:
   commands:
   - env
   - docker info
-  - cat /root/.docker/config.json
+  - ls -al ~/.docker/
   - sh ./build.sh pr-${DRONE_PULL_REQUEST}
   volumes:
   - name: docker
