@@ -14,6 +14,7 @@ steps:
   image: docker:18.09.4
   commands:
   - env
+  - cat /root/.docker/config.json
   - sh ./build.sh pr-${DRONE_PULL_REQUEST}
   volumes:
   - name: docker
