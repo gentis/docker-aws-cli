@@ -14,8 +14,6 @@ steps:
   image: docker:18.09.4
   commands:
   - env
-  - docker info
-  - ls -al ~/.docker/
   - sh ./build.sh pr-${DRONE_PULL_REQUEST}
   volumes:
   - name: docker
@@ -23,6 +21,11 @@ steps:
   when:
     event:
     - pull_request
+  environment:
+    USERNAME:
+      from_secret: USERNAME
+    PASSWORD:
+      from_secret: PASSWORD
 - name: build-tag
   image: docker:18.09.4
   commands:
@@ -33,6 +36,11 @@ steps:
   when:
     event:
     - tag
+  environment:
+    USERNAME:
+      from_secret: USERNAME
+    PASSWORD:
+      from_secret: PASSWORD
 
 image_pull_secrets:
 - dockerconfigjson
