@@ -1,0 +1,32 @@
+kind: pipeline
+name: build
+
+volumes:
+- name: docker
+  host:
+    path: /var/run/docker.sock
+
+node:
+  machine: agent1
+
+steps:
+- name: build-pr
+  image: docker:18.09.4
+  commands:
+  - sh ./build.sh pr-${DRONE_PULL_REQUEST}
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  when:
+    event:
+    - pull_request
+- name: build-tag
+  image: docker:18.09.4
+  commands:
+  - sh ./build.sh ${DRONE_TAG}
+  volumes:
+  - name: docker
+    path: /var/run/docker.sock
+  when:
+    event:
+    - tag
