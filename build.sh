@@ -12,4 +12,6 @@ then
     exit 1
 fi
 
-docker build -t "docker-aws-cli:${1}" .
+docker build -t "hireme/docker-aws-cli:${1}" .
+docker login --username ${USERNAME} --password ${PASSWORD}
+docker push hireme/docker-aws-cli:${1}
