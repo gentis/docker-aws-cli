@@ -13,6 +13,7 @@ steps:
 - name: build-pr
   image: docker:18.09.4
   commands:
+  - env
   - sh ./build.sh pr-${DRONE_PULL_REQUEST}
   volumes:
   - name: docker
